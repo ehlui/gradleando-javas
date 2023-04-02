@@ -1,0 +1,75 @@
+plugins {
+    id 'java'
+}
+
+// this file is actually a "build configuration script" not build script :)
+
+group 'com.gradleando01.practise'
+version '0.0.1-SNAPSHOT'
+
+java {
+
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+
+// Defining main class for gradle when building our jar (It is an essential file for running it)
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.gradleando01.practise.Main'
+    }
+}
+
+// Always before dependencies
+repositories {
+    mavenCentral()
+}
+dependencies {
+    //s
+    // testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+}
+
+// Always after dependencies - This configures tests to use the Junit 5 platform.
+// testing reports at build/reports/tests/test/index.html.
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed"
+    }
+}
+
+// Creating tasks for post build actions
+
+tasks.register('majorVersion1', Exec) {
+    dependsOn("build")
+
+    final outPutJarName = jar.archiveFile.get().getAsFile().getName()
+    final mainClassManifest = jar.manifest.attributes.get('Main-Class').toString().replace('.', '/')
+
+    doFirst {
+        println 'reading from Main class bytecode its major version using <hexdump>...'
+    }
+
+    commandLine 'sh', 'post-build/hexdump_majorversion.sh', outPutJarName, mainClassManifest
+}
+
+
+tasks.register('majorVersion2', Exec) {
+    dependsOn("build")
+
+    final outPutJarName = jar.archiveFile.get().getAsFile().getName()
+    final mainClassManifest = jar.manifest.attributes.get('Main-Class').toString().replace('.', '/')
+
+    doFirst {
+        println 'reading from jar file the major version using <javap>...'
+    }
+
+    commandLine 'sh', 'post-build/jar_major_version.sh', outPutJarName, mainClassManifest
+}
+

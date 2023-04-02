@@ -1,0 +1,3 @@
+rootProject.name = 'gradleando-01'
+
+println "Hello to the project <$rootProject.name> We are learning GRADLE!\nHurray! "
