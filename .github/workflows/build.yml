@@ -30,4 +30,4 @@ jobs:
 
       # 3. Building
       - name: Run build with Gradle Wrapper
-        run: ./gradlew build
+        run:  chmod +x ./gradlew && ./gradlew build
