@@ -26,9 +26,8 @@ jobs:
           java-version: '17'
           distribution: 'corretto'
 
-      - name: 🐘 Setup Gradle
-        uses: gradle/gradle-build-action@v2
-
       # 3. Building
       - name: 🏭 Run build with Gradle Wrapper
-        run:  chmod +x ./gradlew && ./gradlew build
+        run: ./gradlew build
+        # git update-index --chmod=+x gradlew
+
