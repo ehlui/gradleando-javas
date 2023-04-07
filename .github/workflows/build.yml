@@ -25,6 +25,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'corretto'
+          cache: gradle
 
       # 3. Building
       - name: 🏭 Run build with Gradle Wrapper
