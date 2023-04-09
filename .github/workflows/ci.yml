@@ -1,4 +1,4 @@
-name: build
+name: CI
 
 # Events when to trigger our jobs
 on: [push]
@@ -15,9 +15,9 @@ jobs:
 
       - name: 👋 Greetings
         run: run |
-             echo "Workflow <${{ github.workflow }}>"
-             echo "triggered by the <${{ github.event_name }}>"
-             echo "done by <${{ github.actor }}>"
+             printf "Workflow <${{ github.workflow }}>\n"
+             printf "triggered by the <${{ github.event_name }}>\n"
+             printf "done by <${{ github.actor }}>\n"
 
       # 2. Setup JDK
       - name: ☕ Set up JDK 17
@@ -29,6 +29,6 @@ jobs:
 
       # 3. Building
       - name: 🏭 Run build with Gradle Wrapper
-        run: ./gradlew build
+        run: make
         # git update-index --chmod=+x gradlew
 
