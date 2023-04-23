@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 
 class FileMultiLanguageGreeterTest {
 
-  private static FileMultilanguageGreeter greeter;
+  private static FileMultiLanguageGreeter greeter;
 
   @BeforeAll
   public static void init() {
     final ResourceTextFiles resourceTextFiles = new ResourceTextFilesReader();
-    greeter = new FileMultilanguageGreeter(resourceTextFiles);
+    greeter = new FileMultiLanguageGreeter(resourceTextFiles);
   }
 
   @Test

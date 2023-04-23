@@ -7,20 +7,20 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        String language = args[0];
-        sayHello(language);
-    }
 
-    public static String sayHello(final String language) throws IOException {
-        InputStream resourceStream = Main.class.getClassLoader
-                ().getResourceAsStream(language + ".txt");
+  public static void main(String[] args) throws IOException {
+    String language = args[0];
+    sayHello(language);
+  }
 
-        assert resourceStream != null;
+  public static String sayHello(final String language) throws IOException {
+    InputStream resourceStream = Main.class.getClassLoader().getResourceAsStream(language + ".txt");
 
-        BufferedReader bufferedInputStream = new BufferedReader(new InputStreamReader
-                (resourceStream, StandardCharsets.UTF_8));
+    assert resourceStream != null;
 
-        return bufferedInputStream.readLine();
-    }
+    BufferedReader bufferedInputStream = new BufferedReader(
+        new InputStreamReader(resourceStream, StandardCharsets.UTF_8));
+
+    return bufferedInputStream.readLine();
+  }
 }
