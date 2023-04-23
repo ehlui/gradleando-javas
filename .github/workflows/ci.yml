@@ -16,11 +16,19 @@ jobs:
       # 1. Checking to the branch which triggered this event
       - uses: actions/checkout@v3
 
-      - name: 👋 Greetings
+      - name: 👋 Greetings - Linux
+        if: startsWith(matrix.os,'ubuntu')
         run: run |
              printf "Workflow <${{ github.workflow }}>\n"
              printf "triggered by the <${{ github.event_name }}>\n"
              printf "done by <${{ github.actor }}>\n"
+       
+      - name: 👋 Greetings - Windows
+        if: startsWith(matrix.os,'windows')
+        run: run |
+             echo "Workflow <${{ github.workflow }}>"
+             echo "triggered by the <${{ github.event_name }}>"
+             echo "done by <${{ github.actor }}>"
 
       # 2. Setup JDK
       - name: ☕ Set up JDK 17
