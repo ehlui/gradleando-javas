@@ -7,20 +7,32 @@ on: [push]
 jobs:
   # Job Name - Custom key
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: ${{ matrix.os }}
+    strategy:
+        matrix:
+          os: [ubuntu-latest, windows-latest]
+   
+    # name: ${{ matrix.os }} 
     steps:
       # 1. Checking to the branch which triggered this event
       - uses: actions/checkout@v3
 
-      - name: 👋 Greetings
-        run: run |
+      - name: 👋 Greetings - 🐧 Linux 🐧
+        if: matrix.os == 'ubuntu-latest'
+        run: |
              printf "Workflow <${{ github.workflow }}>\n"
              printf "triggered by the <${{ github.event_name }}>\n"
              printf "done by <${{ github.actor }}>\n"
+       
+      - name: 👋 Greetings - 🔳 Windows 🔳
+        if: matrix.os == 'windows-latest'
+        run: |
+             echo "Workflow <${{ github.workflow }}>"
+             echo "triggered by the <${{ github.event_name }}>"
+             echo "done by <${{ github.actor }}>"
 
       # 2. Setup JDK
-      - name: ☕ Set up JDK 17
+      - name: ☕ Set up JDK 17 ♨️
         uses: actions/setup-java@v3
         with:
           java-version: '17'
