@@ -18,7 +18,7 @@ jobs:
 
       - name: 👋 Greetings - Linux
         if: startsWith(matrix.os,'ubuntu')
-        run: run |
+        run: |
              printf "Workflow <${{ github.workflow }}>\n"
              printf "triggered by the <${{ github.event_name }}>\n"
              printf "done by <${{ github.actor }}>\n"
