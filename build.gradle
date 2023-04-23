@@ -1,9 +1,15 @@
 plugins {
     id 'java'
+    id 'checkstyle'
+}
+checkstyle {
+    toolVersion '10.9.3'
+    // Breaking the build if there is one single warning
+    maxWarnings = 0
+    config = rootProject.resources.text.fromFile('config/checkstyle/checkstyle.xml')
 }
 
 // this file is actually a "build configuration script" not build script :)
-
 group 'com.gradleando01.practise'
 version '0.0.1-SNAPSHOT'
 
