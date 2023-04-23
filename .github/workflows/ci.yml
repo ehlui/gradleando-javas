@@ -7,10 +7,10 @@ on: [push]
 jobs:
   # Job Name - Custom key
   build:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
+    strategy:
+        matrix:
+          os: [ubuntu-latest, windows-latest]
     
     steps:
       # 1. Checking to the branch which triggered this event
